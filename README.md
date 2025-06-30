@@ -1,21 +1,17 @@
 # TitanicSurvivalPrediction
 
--   Kaggle url: https://www.kaggle.com/competitions/titanic
-
 > 機器學習實戰專案｜模組化設計 × 設定檔驅動 × 結構清晰  
 > 以 XGBoost 預測鐵達尼號乘客生存機率，展示資料工程與建模流程的完整掌握能力
 
-## 專案亮點 Highlights
+## 專案亮點 | Highlights
 
-✅ 模組化架構: 依循業界慣例，分離 `data / features / models / utils` 等模組，利於擴充與維護。  
-✅ 設定檔驅動: 使用 `config.json` 管理模型參數、特徵欄位與前處理規則，一鍵切換實驗設定。  
-✅ 完整流程自動化: 從資料預處理、特徵建構、模型訓練到推論，全流程由 `main.py` 控制執行。  
-✅ 可擴充日誌紀錄系統: 每次訓練自動產生 `logs/run_yyyymmdd_HHMMSS/`，儲存 config、metrics、summary。  
-✅ 符合生產環境邏輯： 支援 `artifact` 儲存（如 encoder）、JSON 記錄模型設定與結果，便於部署與回溯。
+✅ 模組化架構: 依循業界慣例，分離 `data / features / models / utils` 等模組，利於擴充與維護  
+✅ 設定檔驅動: 使用 `config.json` 管理模型參數、特徵欄位與前處理規則，一鍵切換實驗設定  
+✅ 完整流程自動化: 從資料預處理、特徵建構、模型訓練到推論，全流程由 `main.py` 控制執行  
+✅ 可擴充日誌紀錄系統: 每次訓練自動產生 `logs/run_yyyymmdd_HHMMSS/`，儲存 config、metrics、summary  
+✅ 符合生產環境邏輯： 支援 `artifact` 儲存（如 encoder）、JSON 記錄模型設定與結果，便於部署與回溯
 
----
-
-## 🏗️ 專案結構 Project Structure
+## 專案結構 | Project Structure
 
 ```bash
 TitanicSurvivalPrediction/
@@ -66,7 +62,7 @@ TitanicSurvivalPrediction/
 └── .gitignore              # Git 忽略追蹤清單
 ```
 
-## 技術與套件 Tech Stack
+## 技術與套件 | Tech Stack
 
 - Python 3.11
 - pandas, numpy
@@ -75,15 +71,15 @@ TitanicSurvivalPrediction/
 - joblib (模型儲存)
 - pathlib, json (設定與日誌處理)
 
-## 執行方式 How to Run
+## 執行方式 | How to Run
 
-### 1️⃣ 安裝套件
+### 1. 安裝套件
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2️⃣ 一鍵執行完整流程
+### 2. 一鍵執行完整流程
 
 ```bash
 python3 main.py
@@ -97,22 +93,34 @@ python3 main.py
 
 ## 訓練成果範例 (XGBoost)
 
-| 指標             | 數值      |
-|------------------|-----------|
+| 指標                | 數值      |
+|-------------------|-----------|
 | Training Accuracy | 0.844     |
 | Test Accuracy     | 0.793     |
 
-## 延伸功能建議 Extension Ideas
+## 延伸功能建議 | Extension Ideas
 
 -   支援更多模型 (如 RandomForest、LogisticRegression)
 -   加入交叉驗證、Grid Search、SHAP 模型解釋
 -   加入標準化 (StandardScaler) 模組
 -   將訓練與預測流程包成 CLI 工具或 API
 
-## 關於作者
+## 授權聲明 | License
 
-本專案由 [@twcch](https://github.com/twcch) 親自設計與實作，旨在展示資料分析師對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。
+本專案採用 MIT License 授權，您可以自由使用、修改與散布本程式碼，惟須保留原作者聲明。
 
-個人網站: [志謙's Blog](https://github.io/)
+⚠️ 請注意: Kaggle Titanic 資料集僅用於學術研究與教學用途，請勿將資料或模型商業化部署。
 
-如需進一步說明或合作洽詢，歡迎聯繫！
+## 關於作者 | About the Author
+
+本專案由 **謝志謙 Chih-Chien Hsieh** 親自設計與實作，旨在展示資料科學家的技術實力與工程能力。對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。專案涵蓋完整的 ML 開發流程，從資料前處理、特徵工程、模型訓練、推論流程到日誌與版本管理，強調架構模組化、流程自動化與產出可追溯性
+
+-	聯絡信箱: [twcch1218 [at] gmail.com](mailto:twcch1218@gmail.com)
+-	個人網站: [https://github.io/](https://github.io/)
+-	Github: [https://github.com/twcch](https://github.com/twcch)
+
+📬 如需履歷、面談邀約或合作洽詢，歡迎透過聯絡信箱聯絡本人
+
+## 備註
+
+-   Kaggle url: https://www.kaggle.com/competitions/titanic
