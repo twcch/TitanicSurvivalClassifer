@@ -102,17 +102,17 @@ python3 main.py
 | Training Accuracy | 0.844     |
 | Test Accuracy     | 0.793     |
 
-## 🧩 延伸功能建議 Extension Ideas
+## 延伸功能建議 Extension Ideas
 
 -   支援更多模型 (如 RandomForest、LogisticRegression)
 -   加入交叉驗證、Grid Search、SHAP 模型解釋
 -   加入標準化 (StandardScaler) 模組
 -   將訓練與預測流程包成 CLI 工具或 API
 
-## 🙋‍♂️ 關於作者
+## 關於作者
 
 本專案由 [@twcch](https://github.com/twcch) 親自設計與實作，旨在展示資料分析師對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。
 
-如需進一步說明或合作洽詢，歡迎聯繫！
+個人網站: [志謙's Blog](https://github.io/)
 
----
+如需進一步說明或合作洽詢，歡迎聯繫！
