@@ -1,7 +1,7 @@
-# TitanicSurvivalPrediction
+# Titanic Survival Prediction
 
 > 機器學習實戰專案｜模組化設計 × 設定檔驅動 × 結構清晰  
-> 以 XGBoost 預測鐵達尼號乘客生存機率，展示資料工程與建模流程的完整掌握能力
+> 本專案為一個以 Titanic 生存預測競賽為藍本的機器學習實戰練習，聚焦於模組化設計、工程化流程與設定檔驅動開發，展示我作為資料分析師轉型資料科學家所需之工程能力與架構設計思維
 
 ## 專案亮點 | Highlights
 
@@ -105,6 +105,14 @@ python3 main.py
 -   加入標準化 (StandardScaler) 模組
 -   將訓練與預測流程包成 CLI 工具或 API
 
+## 延伸功能建議 | Possible Extensions
+
+-   支援多模型訓練與結果比較 (RandomForest、Logistic Regression、LightGBM 等)
+-   整合超參數搜尋 (Grid Search / Optuna / Cross Validation)
+-   加入 SHAP 或 LIME 模型解釋，提升模型可解釋性與商業應用可信度
+-   輸出統一報表與版本紀錄 (支援實驗管理)
+-   將 pipeline 封裝為 Python Package 或 CLI 工具，提高跨專案重用性
+
 ## 授權聲明 | License
 
 本專案採用 MIT License 授權，您可以自由使用、修改與散布本程式碼，惟須保留原作者聲明。
@@ -118,6 +126,8 @@ python3 main.py
 -	聯絡信箱: [twcch1218 [at] gmail.com](mailto:twcch1218@gmail.com)
 -	個人網站: [https://github.io/](https://github.io/)
 -	Github: [https://github.com/twcch](https://github.com/twcch)
+
+> 本人正處於商業分析師轉型資料科學家的歷程，期望結合實務經驗與機器學習研究，解決金融與保險領域中的高風險決策問題。
 
 📬 如需履歷、面談邀約或合作洽詢，歡迎透過聯絡信箱聯絡本人
 
