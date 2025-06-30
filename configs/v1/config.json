@@ -78,6 +78,6 @@
   },
   "output": {
     "model_path": "models/v1/model_xgb.pkl",
-    "submission_file": "data/submission.csv"
+    "submission_file": "data/submission/submission.csv"
   }
 }

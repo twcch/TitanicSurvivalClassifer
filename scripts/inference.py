@@ -12,7 +12,6 @@ from src.models.xgboost import XGBoostModel
 
 MODEL_PATH = "models/v1/model_xgb.pkl"
 TEST_FEATURES_PATH = "data/features/test.csv"
-SUBMISSION_PATH = "data/submission/submission.csv"
 
 
 def preprocess_test(test_data, encoder, config):

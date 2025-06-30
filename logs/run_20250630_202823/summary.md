@@ -40,4 +40,4 @@
 ## Output
 
 -    Model Path: `models/v1/model_xgb.pkl`
--    Submission File: `data/submission.csv`
+-    Submission File: `data/submission/submission.csv`
