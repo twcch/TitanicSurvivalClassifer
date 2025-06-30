@@ -85,13 +85,13 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
-### 輸出結果
+## 輸出結果 | Outputs
 
 -   模型儲存於 `models/v1/model_xgb.pkl`
 -   預測輸出於 `data/submission/submission.csv`
 -   訓練紀錄自動寫入 `logs/run_YYYYMMDD_HHMMSS/`
 
-## 訓練成果範例 (XGBoost)
+## 訓練成果範例 | Training Results
 
 | 指標                | 數值      |
 |-------------------|-----------|
@@ -131,6 +131,6 @@ python3 main.py
 
 📬 如需履歷、面談邀約或合作洽詢，歡迎透過聯絡信箱聯絡本人
 
-## 備註
+## 備註 | Notes
 
 -   Kaggle url: https://www.kaggle.com/competitions/titanic
