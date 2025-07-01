@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import json
 import argparse
 import pandas as pd
-from src.data import load_raw_data, save_train_processed_data, save_test_processed_data
+from core.data import load_raw_data, save_train_processed_data, save_test_processed_data
 
 RAW_PATH = "data/raw/"
 PROCESSED_PATH = "data/processed/"

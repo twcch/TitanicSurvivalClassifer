@@ -7,8 +7,8 @@ import json
 import argparse
 import numpy as np
 import pandas as pd
-from src.data import load_test_features_data, save_submission
-from src.models.xgboost import XGBoostModel
+from core.data import load_test_features_data, save_submission
+from core.models.xgboost import XGBoostModel
 
 MODEL_PATH = "models/v1/model_xgb.pkl"
 TEST_FEATURES_PATH = "data/features/test.csv"

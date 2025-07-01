@@ -7,10 +7,10 @@ import json
 import argparse
 import numpy as np
 import pandas as pd
-import src.log_writer as lw
+import core.log_writer as lw
 from sklearn.model_selection import train_test_split
-from src.models.xgboost import XGBoostModel
-from src.features.one_hot_feature_encoder import OneHotFeatureEncoder
+from core.models.xgboost import XGBoostModel
+from core.features.one_hot_feature_encoder import OneHotFeatureEncoder
 
 FEATURES_PATH = "data/features/train.csv"
 MODEL_PATH = "models/v1"

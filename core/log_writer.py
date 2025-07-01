@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 from pathlib import Path
-from src.generate_summary import get_content
+from core.generate_summary import get_content
 
 def create_log_dir(base_path="logs"):
     timestamp = datetime.now().strftime("run_%Y%m%d_%H%M%S")
