@@ -47,7 +47,7 @@ TitanicSurvivalPrediction/
 │   ├── train_model.py          # 模型訓練主程式，會輸出訓練模型與 log 記錄
 │   └── inference.py            # 模型載入與測試集預測，輸出 submission 檔案
 │
-├── src/                    # 專案內部模組
+├── core/                    # 專案內部模組
 │   ├── features/               # 特徵工程模組
 │   │   └── one_hot_feature_encoder.py  # 包裝 sklearn 的 OneHotEncoder，含自定義 artifact 儲存邏輯
 │   ├── models/                 # 模型封裝模組
