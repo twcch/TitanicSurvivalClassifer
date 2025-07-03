@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Copyright © 2025 Chih-Chien Hsieh 謝志謙
+# Copyright © 2025 Chih-Chien Hsieh
 # All rights reserved.
 #
 # Github: https://github.com/twcch
