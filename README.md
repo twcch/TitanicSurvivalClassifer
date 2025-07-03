@@ -115,9 +115,16 @@ python3 main.py
 
 ## 授權聲明 | License
 
-本專案採用 MIT License 授權，您可以自由使用、修改與散布本程式碼，惟須保留原作者聲明。
+Copyright © 2025 Chih-Chien Hsieh 謝志謙  
+All rights reserved.
 
-⚠️ 請注意: Kaggle Titanic 資料集僅用於學術研究與教學用途，請勿將資料或模型商業化部署。
+Github: https://github.com/twcch  
+Website: https://twcch.io/
+
+This work is proprietary and confidential.  
+No part of this codebase may be copied, modified, distributed, or used  
+in any form without the prior written permission of the author.  
+Unauthorized use is strictly prohibited and may result in legal consequences.
 
 ## 關於作者 | About the Author
 
