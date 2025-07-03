@@ -87,48 +87,56 @@ python3 main.py
 
 ## 輸出結果 | Outputs
 
--   模型儲存於 `models/v1/model_xgb.pkl`
--   預測輸出於 `data/submission/submission.csv`
--   訓練紀錄自動寫入 `logs/run_YYYYMMDD_HHMMSS/`
+- 模型儲存於 `models/v1/model_xgb.pkl`
+- 預測輸出於 `data/submission/submission.csv`
+- 訓練紀錄自動寫入 `logs/run_YYYYMMDD_HHMMSS/`
 
 ## 訓練成果範例 | Training Results
 
-| 指標                | 數值      |
-|-------------------|-----------|
-| Training Accuracy | 0.844     |
-| Test Accuracy     | 0.793     |
+| 指標                | 數值    |
+|-------------------|-------|
+| Training Accuracy | 0.844 |
+| Test Accuracy     | 0.793 |
 
 ## 延伸功能建議 | Extension Ideas
 
--   支援更多模型 (如 RandomForest、LogisticRegression)
--   加入交叉驗證、Grid Search、SHAP 模型解釋
--   加入標準化 (StandardScaler) 模組
--   將訓練與預測流程包成 CLI 工具或 API
+- 支援更多模型 (如 RandomForest、LogisticRegression)
+- 加入交叉驗證、Grid Search、SHAP 模型解釋
+- 加入標準化 (StandardScaler) 模組
+- 將訓練與預測流程包成 CLI 工具或 API
 
 ## 延伸功能建議 | Possible Extensions
 
--   支援多模型訓練與結果比較 (RandomForest、Logistic Regression、LightGBM 等)
--   整合超參數搜尋 (Grid Search / Optuna / Cross Validation)
--   加入 SHAP 或 LIME 模型解釋，提升模型可解釋性與商業應用可信度
--   輸出統一報表與版本紀錄 (支援實驗管理)
--   將 pipeline 封裝為 Python Package 或 CLI 工具，提高跨專案重用性
+- 支援多模型訓練與結果比較 (RandomForest、Logistic Regression、LightGBM 等)
+- 整合超參數搜尋 (Grid Search / Optuna / Cross Validation)
+- 加入 SHAP 或 LIME 模型解釋，提升模型可解釋性與商業應用可信度
+- 輸出統一報表與版本紀錄 (支援實驗管理)
+- 將 pipeline 封裝為 Python Package 或 CLI 工具，提高跨專案重用性
 
 ## 授權聲明 | License
 
-本專案採用 MIT License 授權，您可以自由使用、修改與散布本程式碼，惟須保留原作者聲明。
+Copyright © 2025 Chih-Chien Hsieh  
+All rights reserved.
 
-⚠️ 請注意: Kaggle Titanic 資料集僅用於學術研究與教學用途，請勿將資料或模型商業化部署。
+Github: https://github.com/twcch  
+Website: https://twcch.io/
+
+This work is proprietary and confidential.  
+No part of this codebase may be copied, modified, distributed, or used in any form without the prior written permission
+of the author.  
+Unauthorized use is strictly prohibited and may result in legal consequences.
 
 ## 關於作者 | About the Author
 
-本專案由 **謝志謙 Chih-Chien Hsieh** 親自設計與實作，旨在展示資料科學家的技術實力與工程能力。對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。專案涵蓋完整的 ML 開發流程，從資料前處理、特徵工程、模型訓練、推論流程到日誌與版本管理，強調架構模組化、流程自動化與產出可追溯性
+本專案由 **謝志謙 Chih-Chien Hsieh** 親自設計與實作，旨在展示資料科學家的技術實力與工程能力。對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。專案涵蓋完整的
+ML 開發流程，從資料前處理、特徵工程、模型訓練、推論流程到日誌與版本管理，強調架構模組化、流程自動化與產出可追溯性
 
--	聯絡信箱: [twcch1218 [at] gmail.com](mailto:twcch1218@gmail.com)
--	個人網站: [https://github.io/](https://github.io/)
--	Github: [https://github.com/twcch](https://github.com/twcch)
+- 聯絡信箱: [twcch1218 [at] gmail.com](mailto:twcch1218@gmail.com)
+- 個人網站: [https://github.io/](https://github.io/)
+- Github: [https://github.com/twcch](https://github.com/twcch)
 
 📬 如需履歷、面談邀約或合作洽詢，歡迎透過聯絡信箱聯絡本人
 
 ## 備註 | Notes
 
--   Kaggle url: https://www.kaggle.com/competitions/titanic
+- Kaggle url: https://www.kaggle.com/competitions/titanic

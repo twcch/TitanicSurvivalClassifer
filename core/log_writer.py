@@ -1,7 +1,21 @@
+# -------------------------------------------------
+# Copyright © 2025 Chih-Chien Hsieh 謝志謙
+# All rights reserved.
+#
+# Github: https://github.com/twcch
+# Website: https://twcch.io/
+#
+# This work is proprietary and confidential.
+# No part of this codebase may be copied, modified, distributed, or used in any form without the prior written permission of the author.
+# Unauthorized use is strictly prohibited and may result in legal consequences.
+# -------------------------------------------------
+
 import json
 from datetime import datetime
 from pathlib import Path
+
 from core.generate_summary import get_content
+
 
 def create_log_dir(base_path="logs"):
     timestamp = datetime.now().strftime("run_%Y%m%d_%H%M%S")
@@ -28,7 +42,7 @@ def save_summary(log_dir: Path, summary_md: str):
 def save_training_log(config: dict, metrics=None, base_path="logs"):
     log_dir = create_log_dir(base_path)
     save_config(log_dir, config)
-    #save_metrics(log_dir, metrics)
+    # save_metrics(log_dir, metrics)
     save_summary(log_dir, get_content(config))
     print(f"\u2705 訓練記錄已儲存於：{log_dir}")
     return log_dir

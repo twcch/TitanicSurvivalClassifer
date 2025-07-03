@@ -1,6 +1,14 @@
-import json
-from pathlib import Path
-
+# -------------------------------------------------
+# Copyright © 2025 Chih-Chien Hsieh 謝志謙
+# All rights reserved.
+#
+# Github: https://github.com/twcch
+# Website: https://twcch.io/
+#
+# This work is proprietary and confidential.
+# No part of this codebase may be copied, modified, distributed, or used in any form without the prior written permission of the author.
+# Unauthorized use is strictly prohibited and may result in legal consequences.
+# -------------------------------------------------
 
 def generate_content(config: dict) -> None:
     lines = []
