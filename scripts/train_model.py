@@ -9,7 +9,8 @@ import numpy as np
 import pandas as pd
 import core.log_writer as lw
 from sklearn.model_selection import train_test_split
-from core.models.xgboost import XGBoostModel
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from core.models.xgboost_model import XGBoostModel
 from core.features.one_hot_feature_encoder import OneHotFeatureEncoder
 
 FEATURES_PATH = "data/features/train.csv"
@@ -60,14 +61,22 @@ def main(config_path: str):
 
     model = XGBoostModel(**config["model"]["params"])
     model.fit(X_train_all, y_train)
+    y_pred = model.predict(X_test_all)
     model.set_artifact("encoder", encoder)
 
-    print("Training Accuracy:", model.score(X_train_all, y_train))
-    print("Test Accuracy:", model.score(X_test_all, y_test))
+    acc_score = accuracy_score(y_test, y_pred)
+    conf_matrix = confusion_matrix(y_test, y_pred).tolist()  # 轉為 list 才能 JSON 化
+    class_report = classification_report(y_test, y_pred, output_dict=True)  # 轉為 dict
+
+    metrics_summary = {
+        "accuracy": acc_score,
+        "confusion_matrix": conf_matrix,
+        "classification_report": class_report
+    }
 
     model.save(path=config["output"]["model_path"])
 
-    lw.save_training_log(config, )
+    lw.save_training_log(config, metrics_summary)
 
 
 if __name__ == "__main__":

@@ -27,10 +27,10 @@ def save_summary(log_dir: Path, summary_md: str):
     path.write_text(summary_md, encoding="utf-8")
 
 
-def save_training_log(config: dict, metrics=None, base_path="logs"):
+def save_training_log(config: dict, metrics, base_path="logs"):
     log_dir = create_log_dir(base_path)
     save_config(log_dir, config)
-    # save_metrics(log_dir, metrics)
+    save_metrics(log_dir, metrics)
     save_summary(log_dir, get_content(config))
     print(f"\u2705 訓練記錄已儲存於：{log_dir}")
     return log_dir
