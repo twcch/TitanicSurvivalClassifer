@@ -93,10 +93,9 @@ python3 main.py
 
 ## 訓練成果範例 | Training Results
 
-| 指標                | 數值      |
-|-------------------|-----------|
-| Training Accuracy | 0.844     |
-| Test Accuracy     | 0.793     |
+| 指標             | 數值     |
+|----------------|--------|
+| Accuracy Sorce | 0.8379 |
 
 ## 延伸功能建議 | Extension Ideas
 
