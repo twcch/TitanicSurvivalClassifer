@@ -95,7 +95,7 @@ python3 main.py
 
 | 指標             | 數值     |
 |----------------|--------|
-| Accuracy Sorce | 0.8379 |
+| Accuracy Score | 0.8379 |
 
 ## 延伸功能建議 | Extension Ideas
 
