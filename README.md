@@ -51,7 +51,7 @@ TitanicSurvivalPrediction/
 │   ├── features/               # 特徵工程模組
 │   │   └── one_hot_feature_encoder.py  # 包裝 sklearn 的 OneHotEncoder，含自定義 artifact 儲存邏輯
 │   ├── models/                 # 模型封裝模組
-│   │   └── xgboost.py          # 自訂 XGBoost 類別，支援 fit/predict/save/load/artifact 儲存
+│   │   └── xgboost_model.py          # 自訂 XGBoost 類別，支援 fit/predict/save/load/artifact 儲存
 │   ├── data.py                # 資料載入與存檔的統一介面
 │   ├── generate_summary.py    # 自動產出 Markdown 格式的模型摘要
 │   └── log_writer.py          # 訓練 log 管理模組，將 config、metrics、summary 一起寫入 logs 資料夾
