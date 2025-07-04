@@ -61,17 +61,29 @@ def main(config_path: str):
 
     model = XGBoostModel(**config["model"]["params"])
     model.fit(X_train_all, y_train)
-    y_pred = model.predict(X_test_all)
     model.set_artifact("encoder", encoder)
 
-    acc_score = accuracy_score(y_test, y_pred)
-    conf_matrix = confusion_matrix(y_test, y_pred).tolist()  # 轉為 list 才能 JSON 化
-    class_report = classification_report(y_test, y_pred, output_dict=True)  # 轉為 dict
+    y_train_pred = model.predict(X_train_all)
+    train_acc_score = accuracy_score(y_train, y_train_pred)
+    train_conf_matrix = confusion_matrix(y_train, y_train_pred).tolist()  # 轉為 list 才能 JSON 化
+    train_class_report = classification_report(y_train, y_train_pred, output_dict=True)  # 轉為 dict
+
+    y_test_pred = model.predict(X_test_all)
+    test_acc_score = accuracy_score(y_test, y_test_pred)
+    test_conf_matrix = confusion_matrix(y_test, y_test_pred).tolist()  # 轉為 list 才能 JSON 化
+    test_class_report = classification_report(y_test, y_test_pred, output_dict=True)  # 轉為 dict
 
     metrics_summary = {
-        "accuracy": acc_score,
-        "confusion_matrix": conf_matrix,
-        "classification_report": class_report
+        "train": {
+            "accuracy": train_acc_score,
+            "confusion_matrix": train_conf_matrix,
+            "classification_report": train_class_report
+        },
+        "test": {
+            "accuracy": test_acc_score,
+            "confusion_matrix": test_conf_matrix,
+            "classification_report": test_class_report
+        }
     }
 
     model.save(path=config["output"]["model_path"])
