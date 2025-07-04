@@ -51,6 +51,14 @@ def preprocess_data(df: pd.DataFrame, config: dict):
 
     return X_train_all, X_test_all, y_train, y_test, encoder
 
+def evaluate_model(y_true, y_pred) -> dict:
+    """計算準確率與報表，轉為 JSON 可序列化格式"""
+    return {
+        "accuracy": accuracy_score(y_true, y_pred),
+        "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
+        "classification_report": classification_report(y_true, y_pred, output_dict=True),
+    }
+
 
 def main(config_path: str):
     with open(config_path, "r") as f:
@@ -64,31 +72,16 @@ def main(config_path: str):
     model.set_artifact("encoder", encoder)
 
     y_train_pred = model.predict(X_train_all)
-    train_acc_score = accuracy_score(y_train, y_train_pred)
-    train_conf_matrix = confusion_matrix(y_train, y_train_pred).tolist()  # 轉為 list 才能 JSON 化
-    train_class_report = classification_report(y_train, y_train_pred, output_dict=True)  # 轉為 dict
-
     y_test_pred = model.predict(X_test_all)
-    test_acc_score = accuracy_score(y_test, y_test_pred)
-    test_conf_matrix = confusion_matrix(y_test, y_test_pred).tolist()  # 轉為 list 才能 JSON 化
-    test_class_report = classification_report(y_test, y_test_pred, output_dict=True)  # 轉為 dict
 
-    metrics_summary = {
-        "train": {
-            "accuracy": train_acc_score,
-            "confusion_matrix": train_conf_matrix,
-            "classification_report": train_class_report
-        },
-        "test": {
-            "accuracy": test_acc_score,
-            "confusion_matrix": test_conf_matrix,
-            "classification_report": test_class_report
-        }
+    metrics = {
+        "train": evaluate_model(y_train, y_train_pred),
+        "test": evaluate_model(y_test, y_test_pred)
     }
 
     model.save(path=config["output"]["model_path"])
 
-    lw.save_training_log(config, metrics_summary)
+    lw.save_training_log(config, metrics)
 
 
 if __name__ == "__main__":
