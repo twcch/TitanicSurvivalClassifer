@@ -5,51 +5,86 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import json
 import argparse
-import numpy as np
 import pandas as pd
-import core.log_writer as lw
-from sklearn.model_selection import train_test_split
+from typing import Tuple
+from core.data import load_train_features_data
+from sklearn.model_selection import train_test_split, KFold
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from core.pipeline.encoding import encode_and_merge_features
 from core.models.xgboost_model import XGBoostModel
-from core.features.one_hot_feature_encoder import OneHotFeatureEncoder
-
-FEATURES_PATH = "data/features/train.csv"
-MODEL_PATH = "models/v1"
+from core.log_writer import save_training_log
 
 
-def load_data():
-    df = pd.read_csv(FEATURES_PATH)
+def resolve_output_paths(config: dict, version: str) -> None:
+    output_config = config.get('output', {})
+    for key, path in output_config.items():
+        if isinstance(path, str):
+            output_config[key] = path.replace("{version}", version)
 
-    return df
+    return output_config
 
 
-def preprocess_data(df: pd.DataFrame, config: dict):
-    categorical = config["features"]["categorical"]
-    numerical = config["features"]["numerical"]
+def get_effective_features(data: pd.DataFrame, config: dict) -> list:
+    features = config['variable']['features']
+    drop_features = config.get('feature_engineering', {}).get('drop_features', [])
 
-    X = df[categorical + numerical]
-    y = df["Survived"]
+    # 先合併 config 中的欄位，再從實際存在欄位中過濾
+    selected = features['categorical'] + features['numerical']
+    selected = [col for col in selected if col not in drop_features and col in data.columns]
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
+    return selected
+
+
+def holdout_split(data: pd.DataFrame, config: dict) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+    selected_features = get_effective_features(data, config)
+    X = data[selected_features]
+    y = data[config['variable']['target']]
+
+    params = config['training']['holdout']
+
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        train_size=params['train_size'],
+                                                        test_size=params['test_size'],
+                                                        random_state=params['random_state'])
+
+    return X_train, X_test, y_train, y_test
+
+
+def generate_kfold_splits(data: pd.DataFrame, config: dict):
+    selected_features = get_effective_features(data, config)
+    X = data[selected_features]
+    y = data[config['variable']['target']]
+
+    params = config['training']['k-fold']
+    kf = KFold(
+        n_splits=params['n_splits'],
+        shuffle=params['shuffle'],
+        random_state=params['random_state']
     )
 
-    # One-hot encoding for categorical features
-    encoder_config = config["feature_engineering"]["encodings"]["onehot"]
-    categorical = encoder_config["features"]
-    encoder_params = encoder_config["params"]
+    folds = []
+    for train_idx, test_idx in kf.split(X, y):
+        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+        folds.append((X_train, X_test, y_train, y_test))
 
-    encoder = OneHotFeatureEncoder(
-        categorical_features=categorical,
-        **encoder_params
-    )
-    X_train_cat = encoder.fit_transform(X_train)
-    X_test_cat = encoder.transform(X_test)
+    return folds
 
-    X_train_all = np.hstack([X_train_cat, X_train[numerical].values])
-    X_test_all = np.hstack([X_test_cat, X_test[numerical].values])
 
-    return X_train_all, X_test_all, y_train, y_test, encoder
+def get_model_from_config(config: dict):
+    model_name = config['model']['name'].lower()
+    model_params = config['model'].get('params', {})
+
+    if model_name == 'xgboost':
+        return XGBoostModel(**model_params)
+    # elif model_name == "random_forest":
+    #     return RandomForestModel(**model_params)
+    # elif model_name == "logistic_regression":
+    #     return LogisticRegressionModel(**model_params)
+    else:
+        raise ValueError(f"Unsupported model: {model_name}")
+
 
 def evaluate_model(y_true, y_pred) -> dict:
     """計算準確率與報表，轉為 JSON 可序列化格式"""
@@ -60,38 +95,67 @@ def evaluate_model(y_true, y_pred) -> dict:
     }
 
 
+def train_model(data: pd.DataFrame, config: dict):
+    model = get_model_from_config(config)
+
+    if config['training']['method'] == 'holdout':
+        X_train, X_test, y_train, y_test = holdout_split(data, config)
+
+        X_train_all, X_test_all, encoder = encode_and_merge_features(X_train, X_test, config)
+
+        model.fit(X_train_all, y_train)
+        # 儲存 encoder (僅在 holdout 有意義)
+        model.set_artifact('encoder', encoder)
+        # 預測與評估
+        y_train_pred = model.predict(X_train_all)
+        y_test_pred = model.predict(X_test_all)
+
+        metrics = {
+            "train": evaluate_model(y_train, y_train_pred),
+            "test": evaluate_model(y_test, y_test_pred)
+        }
+
+    elif config['training']['method'] == 'k-fold':
+        folds = generate_kfold_splits(data, config)
+        fold_metrics = []
+
+        for i, (X_train, X_test, y_train, y_test) in enumerate(folds):
+            print(f"[Fold {i + 1}] Training...")
+            X_train_all, X_test_all, encoder = encode_and_merge_features(X_train, X_test, config)
+
+            fold_model = get_model_from_config(config)  # 每折重建模型
+            fold_model.fit(X_train_all, y_train)
+
+            y_train_pred = fold_model.predict(X_train_all)
+            y_test_pred = fold_model.predict(X_test_all)
+
+            fold_metrics.append({
+                "fold": i + 1,
+                "train": evaluate_model(y_train, y_train_pred),
+                "test": evaluate_model(y_test, y_test_pred)
+            })
+
+        metrics = fold_metrics  # 傳回整體每折評估結果
+    else:
+        raise ValueError("Unsupported training method")
+
+    model.save(resolve_output_paths(config, config['model']['version'])['model_path'])
+
+    return metrics
+
+
 def main(config_path: str):
-    with open(config_path, "r") as f:
+    with open(config_path, 'r') as f:
         config = json.load(f)
 
-    df = load_data()
-    X_train_all, X_test_all, y_train, y_test, encoder = preprocess_data(df, config)
-
-    model = XGBoostModel(**config["model"]["params"])
-    model.fit(X_train_all, y_train)
-    model.set_artifact("encoder", encoder)
-
-    y_train_pred = model.predict(X_train_all)
-    y_test_pred = model.predict(X_test_all)
-
-    metrics = {
-        "train": evaluate_model(y_train, y_train_pred),
-        "test": evaluate_model(y_test, y_test_pred)
-    }
-
-    model.save(path=config["output"]["model_path"])
-
-    lw.save_training_log(config, metrics)
+    train_features_data = load_train_features_data()
+    metrics = train_model(train_features_data, config)
+    save_training_log(config, metrics)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--config",
-        type=str,
-        default="configs/v1/config.json",
-        help="Path to the configuration file",
-    )
+    parser.add_argument('--config')
 
     args = parser.parse_args()
     main(args.config)

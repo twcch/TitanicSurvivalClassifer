@@ -1,19 +1,18 @@
 from pathlib import Path
 
 import joblib
-
 from xgboost import XGBClassifier
 
 
 class XGBoostModel:
     def __init__(self, **kwargs):
         default_params = {
-            "n_estimators": 100,
-            "learning_rate": 0.01,
-            "max_depth": 4,
-            "use_label_encoder": False,
-            "eval_metric": "logloss",
-            "random_state": 42,
+            'n_estimators': 100,
+            'learning_rate': 0.01,
+            'max_depth': 4,
+            'use_label_encoder': False,
+            'eval_metric': 'logloss',
+            'random_state': 42,
         }
         default_params.update(kwargs)
         self.model = XGBClassifier(**default_params)
@@ -37,20 +36,22 @@ class XGBoostModel:
     def list_artifacts(self):
         return list(self._artifacts.keys())
 
-    def load(self, path="models/v1/model_xgb.pkl"):
+    @classmethod
+    def load(cls, path):
         path = Path(path)
-
         obj = joblib.load(path)
-        self.model = obj["model"]
-        self._artifacts = obj.get("artifacts", {})  # 如果有附加元件則載入
+        model = cls()
+        model.model = obj['model']
+        model._artifacts = obj.get('artifacts', {})  # 如果有附加元件則載入
+        return model
 
-    def save(self, path="models/v1/model_xgb.pkl") -> None:
+    def save(self, path) -> None:
         save_path = Path(path)
 
         joblib.dump(
             {
-                "model": self.model,
-                "artifacts": self._artifacts
+                'model': self.model,
+                'artifacts': self._artifacts
             },
             save_path,
         )

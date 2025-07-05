@@ -44,7 +44,7 @@ def generate_content(config: dict) -> None:
     return "\n".join(lines)
 
 
-def get_content(config: dict):
+def get_content(config):
     content = generate_content(config)
 
     return content
