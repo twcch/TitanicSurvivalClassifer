@@ -25,9 +25,9 @@ def main():
     config_path = f'configs/{version}/config.json'
 
     steps = [
-        # ('scripts/preprocess_data.py', f'python3 scripts/preprocess_data.py --config {config_path}'),
-        # ('scripts/build_features.py', f'python3 scripts/build_features.py --config {config_path}'),
-        # ('scripts/train_model.py', f'python3 scripts/train_model.py --config {config_path}'),
+        ('scripts/preprocess_data.py', f'python3 scripts/preprocess_data.py --config {config_path}'),
+        ('scripts/build_features.py', f'python3 scripts/build_features.py --config {config_path}'),
+        ('scripts/train_model.py', f'python3 scripts/train_model.py --config {config_path}'),
         ('scripts/inference.py', f'python3 scripts/inference.py --config {config_path}')
     ]
 
