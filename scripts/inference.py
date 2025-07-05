@@ -13,14 +13,6 @@ from core.pipeline.preprocessing import preprocess_data
 from core.pipeline.feature_engineering import build_features
 
 
-# def resolve_output_paths(config: dict, version: str) -> dict:
-#     output_config = config.get('output', {})
-#     resolved = {}
-#     for key, path in output_config.items():
-#         if isinstance(path, str):
-#             resolved[key] = path.replace('{version}', version)
-#     return resolved
-
 def resolve_output_paths(config: dict, version: str) -> None:
     output_config = config.get('output', {})
     for key, path in output_config.items():
