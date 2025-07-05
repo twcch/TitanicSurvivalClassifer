@@ -15,51 +15,40 @@
 
 ```bash
 TitanicSurvivalPrediction/
-├── configs/                  # 訓練與推論的 JSON 設定檔，集中管理模型參數、特徵欄位與前處理邏輯
-│
-├── data/
-│   ├── raw/                 # 原始資料
-│   ├── processed/           # 預處理後的資料
-│   ├── features/            # 特徵工程後的資料
-│   └── predictions/         # 模型預測結果
-│
-├── logs/
-│   └── v1/                  # 每次訓練的執行記錄，自動產出含 config.json、summary.md 的日誌資料夾
-│       └── run_YYYYMMDD_HHMMSS/
-│           ├── config.json     # 當次訓練的設定檔快照
-│           └── summary.md      # Markdown 格式總結
-│
-├── models/                  # 儲存訓練完成的模型物件與其對應設定
-│   └── v1/
-│       ├── model_xgb.pkl        # XGBoost 模型 (二進位格式，由 joblib 儲存)
-│       └── config.json          # 與此模型對應的訓練參數與流程設定
-│
-├── notebooks/              # 用於探索性資料分析 (EDA) 的 Jupyter Notebook 檔案
-│   ├── eda_raw.ipynb           # 原始資料的探索與視覺化
-│   └── eda_cleaned.ipynb       # 清洗後資料的分析與確認
-│
-├── outputs/
-│   └── plots/                  # 可視化圖片輸出，如特徵分布、模型重要性圖等
-│
-├── scripts/                 # 封裝好的功能性腳本，可單獨執行流程階段
-│   ├── preprocess_data.py      # 資料預處理
-│   ├── build_features.py       # 特徵工程
-│   ├── train_model.py          # 模型訓練主程式，會輸出訓練模型與 log 記錄
-│   └── inference.py            # 模型載入與測試集預測，輸出 submission 檔案
-│
-├── core/                    # 專案內部模組
-│   ├── features/               # 特徵工程模組
-│   │   └── one_hot_feature_encoder.py  # 包裝 sklearn 的 OneHotEncoder，含自定義 artifact 儲存邏輯
-│   ├── models/                 # 模型封裝模組
-│   │   └── xgboost_model.py          # 自訂 XGBoost 類別，支援 fit/predict/save/load/artifact 儲存
-│   ├── data.py                # 資料載入與存檔的統一介面
-│   ├── generate_summary.py    # 自動產出 Markdown 格式的模型摘要
-│   └── log_writer.py          # 訓練 log 管理模組，將 config、metrics、summary 一起寫入 logs 資料夾
-│
-├── main.py                 # 主控腳本，串接整體流程
-├── requirements.txt        # Python 環境依賴檔案，使用 pip install -r 安裝
-├── README.md               # 專案說明文件
-└── .gitignore              # Git 忽略追蹤清單
+├── configs/                     # 設定檔 (包含模型、特徵、訓練方式)
+│   └── ...                     
+├── core/                        # 核心模組 (資料處理、模型、前處理、編碼)
+│   ├── features/
+│   │   └── one_hot_feature_encoder.py   # One-hot 編碼器封裝
+│   ├── models/
+│   │   └── xgboost_model.py             # XGBoost 模型封裝
+│   ├── pipeline/
+│   │   ├── encoding.py                 # 特徵編碼流程
+│   │   ├── feature_engineering.py     # 特徵工程流程
+│   │   └── preprocessing.py           # 前處理流程
+│   ├── data.py                        # 資料存取與儲存 (封裝 I/O 操作)
+│   ├── generate_summary.py           # 統計摘要報表產出
+│   └── log_writer.py                 # 訓練與評估日誌紀錄器
+├── data/                        # 資料夾
+│   ├── raw/                     # 原始資料
+│   ├── processed/               # 前處理後資料
+│   └── features/                # 特徵工程後資料
+├── notebooks/                   # Jupyter Notebook 開發草稿區
+├── results/                     # 模型與輸出結果
+│   ├── logs/                    # 訓練過程與評估結果紀錄
+│   │   └── run_YYYYMMDD_HHMMSS/
+│   ├── polts/                   # 可視化圖片輸出，如特徵分布、模型重要性圖等
+│   └── v1_0_0/                  # 版本化輸出結果
+│       ├── models/             # 儲存模型檔案 (*.pkl)
+│       └── submission/         # 儲存提交檔案 (submission.csv)
+├── scripts/                     # 主程序腳本 (可執行)
+│   ├── preprocess_data.py
+│   ├── build_features.py
+│   ├── train_model.py
+│   └── inference.py
+├── main.py                      # 主控腳本 (依序執行整個 pipeline)
+├── requirements.txt            # Python 套件需求清單
+└── README.md                   # 專案說明文件
 ```
 
 ## 技術與套件 | Tech Stack
