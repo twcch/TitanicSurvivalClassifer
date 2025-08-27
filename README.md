@@ -107,30 +107,20 @@ python3 main.py
 - 輸出統一報表與版本紀錄 (支援實驗管理)
 - 將 pipeline 封裝為 Python Package 或 CLI 工具，提高跨專案重用性
 
-## 授權聲明 | License
+## License
 
-Copyright © 2025 Chih-Chien Hsieh  
-All rights reserved.
+Auralytics is licensed under the Apache License 2.0. You are free to use, modify, and distribute the project, as long as you comply with the terms of the license, including proper attribution and inclusion of the license notice.
 
-Github: https://github.com/twcch  
-Website: https://twcch.io/
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
-This work is proprietary and confidential.  
-No part of this codebase may be copied, modified, distributed, or used in any form without the prior written permission
-of the author.  
-Unauthorized use is strictly prohibited and may result in legal consequences.
+## Contact Us
 
-## 關於作者 | About the Author
+If you have any questions or suggestions, feel free to reach out to us:
 
-本專案由 **謝志謙 Chih-Chien Hsieh** 親自設計與實作，旨在展示資料科學家的技術實力與工程能力。對機器學習、特徵工程與模型訓練流程的深刻理解與工程實踐能力。專案涵蓋完整的
-ML 開發流程，從資料前處理、特徵工程、模型訓練、推論流程到日誌與版本管理，強調架構模組化、流程自動化與產出可追溯性
+Email: twcch1218 [at] gmail.com
 
-- 聯絡信箱: [twcch1218 [at] gmail.com](mailto:twcch1218@gmail.com)
-- 個人網站: [https://github.io/](https://github.io/)
-- Github: [https://github.com/twcch](https://github.com/twcch)
+Thank you for your interest in ConstructionBloodbath! We look forward to your contributions and hope you enjoy using and improving this project.
 
-📬 如需履歷、面談邀約或合作洽詢，歡迎透過聯絡信箱聯絡本人
-
-## 備註 | Notes
+## Notes
 
 - Kaggle url: https://www.kaggle.com/competitions/titanic
