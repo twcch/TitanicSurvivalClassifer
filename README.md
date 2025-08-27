@@ -119,7 +119,7 @@ If you have any questions or suggestions, feel free to reach out to us:
 
 - Email: twcch1218 [at] gmail.com
 
-Thank you for your interest in ConstructionBloodbath! We look forward to your contributions and hope you enjoy using and improving this project.
+Thank you for your interest in TitanicSurvivalClassifer! We look forward to your contributions and hope you enjoy using and improving this project.
 
 ## Notes
 
